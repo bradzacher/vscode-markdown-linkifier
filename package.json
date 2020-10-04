@@ -60,6 +60,70 @@
   ],
   "main": "./dist/extension.js",
   "contributes": {
-    "commands": []
+    "commands": [],
+    "configuration": {
+      "title": "Markdown Linkifier",
+      "type": "object",
+      "properties": {
+        "markdown-linkifier.ignore.file": {
+          "title": "Ignored File Names",
+          "description": "File names that should just be ignored.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            ".cspell.json",
+            ".DS_Store",
+            ".editorconfig",
+            ".eslintrc",
+            ".eslintrc.js",
+            ".eslintrc.json",
+            ".eslintrc.yaml",
+            ".gitignore",
+            ".huskyrc.json",
+            ".markdownlint.json",
+            ".markdownlintignore",
+            ".prettierignore",
+            ".prettierrc.json",
+            ".vscodeignore",
+            "LICENCE",
+            "package.json",
+            "README.md",
+            "tsconfig.json",
+            "yarn.lock"
+          ]
+        },
+        "markdown-linkifier.ignore.folder": {
+          "title": "Ignored Folder Names",
+          "description": "Folder that should just be ignored.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            ".git",
+            ".vscode",
+            "node_modules"
+          ]
+        },
+        "markdown-linkifier.ignore.path": {
+          "title": "Ignored Paths",
+          "description": "Paths that should just be ignored. This applies to both files and folders. Paths are relative to the workspace root.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "markdown-linkifier.roots": {
+          "title": "Root Folder Paths",
+          "description": "Folders that should be searched for docs. If this is configured, the extension will treat each root as a self-contained set of files. If this is not configured, the entire workspace will be treated as the root.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
   }
 }
