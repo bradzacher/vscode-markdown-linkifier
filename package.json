@@ -7,7 +7,7 @@
   "publisher": "bradzacher",
   "repository": {
     "type": "git",
-    "url": "https://github.com/bradzacher/vscode-coloured-status-bar-problems.git"
+    "url": "https://github.com/bradzacher/vscode-markdown-linkifier.git"
   },
   "author": {
     "email": "brad.zacher@gmail.com",

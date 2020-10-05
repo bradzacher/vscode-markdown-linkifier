@@ -8,11 +8,11 @@ This extension does two things inside markdown files:
 
 1. whenever you type `[[`, it will provide auto-completions based on the other markdown files in your workspace.
 
-   ![screenshot of autocomplete](./screenshot_autocomplete.png)
+   ![screenshot of autocomplete](https://raw.githubusercontent.com/bradzacher/vscode-markdown-linkifier/main/screenshot_autocomplete.png)
 
 2. it will linkify these `[[name]]` segments to allow you to quick-open the file.
 
-   ![screenshot of links](./screenshot_links.png)
+   ![screenshot of links](https://raw.githubusercontent.com/bradzacher/vscode-markdown-linkifier/main/screenshot_links.png)
 
 How does it work?
 It simply scans your workspace for `.md` files, and treats all underscores in filenames as spaces.
