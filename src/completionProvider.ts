@@ -1,7 +1,7 @@
 import type { CompletionItemProvider } from 'vscode';
 import * as vscode from 'vscode';
 
-import { recursivelyFindAll } from './utils/recursivelyFindAll';
+import type { Finder } from './utils/cachedFileFinder';
 
 function getSearchText(line: string): string | null {
   for (let i = line.length - 1; i > 0; i -= 1) {
@@ -19,29 +19,31 @@ function getSearchText(line: string): string | null {
   return null;
 }
 
-export const competionProvider: CompletionItemProvider = {
-  provideCompletionItems(document, position) {
-    // get all text until the `position` and check if it reads `console.`
-    // and if so then complete if `log`, `warn`, and `error`
-    const linePrefix = document
-      .lineAt(position)
-      .text.substr(0, position.character);
-    const searchText = getSearchText(linePrefix);
+function competionProvider(finder: Finder): CompletionItemProvider {
+  return {
+    provideCompletionItems(document, position) {
+      const linePrefix = document
+        .lineAt(position)
+        .text.substr(0, position.character);
+      const searchText = getSearchText(linePrefix);
 
-    if (searchText == null) {
-      return [];
-    }
+      if (searchText == null) {
+        return [];
+      }
 
-    const workspace = vscode.workspace.getWorkspaceFolder(document.uri);
-    if (!workspace) {
-      return [];
-    }
+      const workspace = vscode.workspace.getWorkspaceFolder(document.uri);
+      if (!workspace) {
+        return [];
+      }
 
-    const matches = recursivelyFindAll(document);
+      const matches = finder.findAll(document);
 
-    return matches.map(
-      match =>
-        new vscode.CompletionItem(match.name, vscode.CompletionItemKind.File),
-    );
-  },
-};
+      return matches.map(
+        match =>
+          new vscode.CompletionItem(match.name, vscode.CompletionItemKind.File),
+      );
+    },
+  };
+}
+
+export { competionProvider };

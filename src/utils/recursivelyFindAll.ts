@@ -2,7 +2,8 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as vscode from 'vscode';
 
-import { toStringSet } from './toStringSet';
+import { getConfig } from './getConfig';
+import { getRootForUri } from './getRootForUri';
 
 type Match = {
   name: string;
@@ -60,33 +61,14 @@ function recursivelyFindAll(document: vscode.TextDocument): Array<Match> {
   }
   const workspaceRoot = workspace.uri.fsPath;
 
-  const config = vscode.workspace.getConfiguration('markdown-linkifier');
-  const fileIgnoreList = toStringSet(
-    config.get<ReadonlyArray<string>>('ignore.file'),
-  );
-  const folderIgnoreList = toStringSet(
-    config.get<ReadonlyArray<string>>('ignore.folder'),
-  );
-  let pathIgnoreList = [
-    ...(config.get<ReadonlyArray<string>>('ignore.path') ?? []),
-  ];
+  const config = getConfig();
+  const fileRoot = getRootForUri(document.uri);
 
-  let fileRoot = workspaceRoot;
+  let pathIgnoreList = [...config.pathIgnoreList];
 
-  // narrow the search to the specific root
-  const roots = config.get<ReadonlyArray<string>>('roots');
-  if (roots) {
-    const matchedRoot = roots.some(rootPart => {
-      const root = path.join(workspaceRoot, rootPart);
-      if (document.uri.fsPath.startsWith(root)) {
-        fileRoot = root;
-        return true;
-      }
-      return false;
-    });
-    if (!matchedRoot) {
-      pathIgnoreList.push(...roots);
-    }
+  // ignore the configured roots if we're doing a workspace root search
+  if (config.roots.length && fileRoot === workspaceRoot) {
+    pathIgnoreList.push(...config.roots);
   }
 
   // make the path ignores absolute
@@ -96,9 +78,9 @@ function recursivelyFindAll(document: vscode.TextDocument): Array<Match> {
 
   const matches = recursivelyFindAllHelper(
     fileRoot,
-    fileIgnoreList,
-    folderIgnoreList,
-    pathIgnoreList,
+    config.fileIgnoreList,
+    config.folderIgnoreList,
+    config.pathIgnoreList,
   );
 
   return matches;
