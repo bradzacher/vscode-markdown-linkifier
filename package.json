@@ -44,10 +44,9 @@
     "vscode": "^1.32.0"
   },
   "keywords": [
-    "problems",
-    "statusbar",
-    "colour",
-    "highlight"
+    "markdown",
+    "link",
+    "linkify"
   ],
   "categories": [
     "Other"
@@ -56,7 +55,6 @@
     "*"
   ],
   "extensionKind": [
-    "ui",
     "workspace"
   ],
   "main": "./dist/extension.js",

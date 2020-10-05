@@ -1,5 +1,9 @@
 # vscode-markdown-linkifier
 
+[![version](https://vsmarketplacebadge.apphb.com/version-short/bradzacher.vscode-markdown-linkifier.svg)](https://marketplace.visualstudio.com/items?itemName=bradzacher.vscode-markdown-linkifier)
+[![installs](https://vsmarketplacebadge.apphb.com/installs-short/bradzacher.vscode-markdown-linkifier.svg)](https://marketplace.visualstudio.com/items?itemName=bradzacher.vscode-markdown-linkifier)
+[![rating](https://vsmarketplacebadge.apphb.com/rating-short/bradzacher.vscode-markdown-linkifier.svg)](https://marketplace.visualstudio.com/items?itemName=bradzacher.vscode-markdown-linkifier)
+
 Creates quick local markdown links using [[name]] syntax.
 
 I built this extension to help me write notes for my Dungeons and Dragons campaign.
