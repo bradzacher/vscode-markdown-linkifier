@@ -1,6 +1,7 @@
 {
   "name": "vscode-markdown-linkifier",
-  "displayName": "Creates quick local markdown links using [[name]] syntax",
+  "displayName": "Markdown Linkifier",
+  "description": "Creates quick local markdown links using [[name]] syntax",
   "version": "0.0.1",
   "license": "MIT",
   "publisher": "bradzacher",
