@@ -14,7 +14,7 @@
     "url": "https://github.com/bradzacher"
   },
   "scripts": {
-    "vscode:prepublish": "yarn run build",
+    "vscode:prepublish": "yarn run clean && yarn run build",
     "build": "tsc -b tsconfig.build.json",
     "clean": "tsc -b tsconfig.build.json --clean",
     "format": "prettier --write \"./**/*.{ts,js,json,md}\" --ignore-path ./.prettierignore",
